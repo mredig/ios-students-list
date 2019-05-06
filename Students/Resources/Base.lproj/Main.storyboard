@@ -21,18 +21,40 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VnT-D8-ugq">
                                 <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-cT-h5a">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort By:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asm-Go-QZQ">
+                                                <rect key="frame" x="16" y="0.0" width="343" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="asm-Go-QZQ" firstAttribute="top" secondItem="hHb-cT-h5a" secondAttribute="top" id="7Zf-Ot-He0"/>
+                                            <constraint firstAttribute="trailing" secondItem="asm-Go-QZQ" secondAttribute="trailing" constant="16" id="WRu-dV-20n"/>
+                                            <constraint firstAttribute="bottom" secondItem="asm-Go-QZQ" secondAttribute="bottom" id="hXR-Bb-XAZ"/>
+                                            <constraint firstItem="asm-Go-QZQ" firstAttribute="leading" secondItem="hHb-cT-h5a" secondAttribute="leading" constant="16" id="lZj-c5-4an"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuf-oH-RqP">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                                        <rect key="frame" x="0.0" y="24" width="375" height="33"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ggw-nU-kso">
-                                                <rect key="frame" x="16" y="0.0" width="343" height="29"/>
+                                                <rect key="frame" x="16" y="0.0" width="343" height="34"/>
                                                 <segments>
-                                                    <segment title="First"/>
-                                                    <segment title="Second"/>
+                                                    <segment title="First Name"/>
+                                                    <segment title="Last Name"/>
                                                 </segments>
+                                                <color key="tintColor" red="0.61696056249999998" green="0.86162159969999996" blue="0.71867128790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="sort:" destination="EY0-JV-2nW" eventType="valueChanged" id="p1q-ow-BpO"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ggw-nU-kso" secondAttribute="trailing" constant="16" id="Ohf-fO-G9A"/>
                                             <constraint firstItem="Ggw-nU-kso" firstAttribute="top" secondItem="kuf-oH-RqP" secondAttribute="top" id="Tni-u6-m56"/>
@@ -41,7 +63,7 @@
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="SIR-On-lCh">
-                                        <rect key="frame" x="0.0" y="36" width="375" height="591"/>
+                                        <rect key="frame" x="0.0" y="65" width="375" height="562"/>
                                         <connections>
                                             <segue destination="zJT-7t-w1A" kind="embed" identifier="EmbedStudentsTableView" id="JwJ-4w-xEl"/>
                                         </connections>
@@ -52,7 +74,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.37992407569999997" blue="0.16470744749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="VnT-D8-ugq" firstAttribute="leading" secondItem="UOF-io-n6K" secondAttribute="leading" id="9Ti-KC-lqU"/>
                             <constraint firstItem="UOF-io-n6K" firstAttribute="trailing" secondItem="VnT-D8-ugq" secondAttribute="trailing" id="MO5-Af-qfr"/>
@@ -61,6 +83,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UOF-io-n6K"/>
                     </view>
+                    <connections>
+                        <outlet property="sortSelector" destination="Ggw-nU-kso" id="2of-xX-Kba"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOn-SO-bkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,9 +96,9 @@
             <objects>
                 <tableViewController id="zJT-7t-w1A" customClass="StudentsTableViewController" customModule="Students" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PkE-6r-GK2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" textLabel="Qek-DD-dhC" style="IBUITableViewCellStyleDefault" id="Adt-Nn-Zro">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>

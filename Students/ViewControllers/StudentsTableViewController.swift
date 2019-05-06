@@ -29,6 +29,8 @@ class StudentsTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath)
 		cell.textLabel?.text = students[indexPath.row].name
+		cell.textLabel?.textColor = .white
+		cell.backgroundColor = .clear
 		return cell
 	}
 }

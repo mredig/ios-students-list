@@ -15,7 +15,11 @@ class MainViewController: UIViewController {
 	private let networkClient = NetworkClient()
 	private var studentsTableViewController: StudentsTableViewController!
 
-	private var students: [Student] = []
+	private var students: [Student] = [] {
+		didSet {
+			updateSort()
+		}
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +36,13 @@ class MainViewController: UIViewController {
 		}
     }
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateSort()
+	}
+
 	private func updateSort() {
+		guard isViewLoaded else { return }
 		let sortedStudents: [Student]
 		switch sortSelector.selectedSegmentIndex {
 		case 0:
@@ -47,6 +57,10 @@ class MainViewController: UIViewController {
 			}
 		}
 		studentsTableViewController.students = sortedStudents
+	}
+
+	@IBAction func sort(_ sender: UISegmentedControl) {
+		updateSort()
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
